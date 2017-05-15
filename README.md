@@ -12,7 +12,7 @@ We use `checkValidity` & `setCustomValidity` to validate the input value. [See m
 # Submit (Enhancement)
 Browser won't check validity if you call native submit by js. We hook the native submit to check validity.
 
-# Browser Compality
+# Browser Compatibility
 * `checkValidity` [IE 10+](http://caniuse.com/#search=checkValidity)
 
 # Read More

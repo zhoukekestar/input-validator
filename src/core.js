@@ -42,7 +42,12 @@
    * that can show invalid message for input by browser with default behavior.
    **/
   document.body.addEventListener('click', function (e) {
-    validateForm(this);
+    var form = e.target;
+    while (form.nodeName !== 'FORM') {
+      form = form.parentNode;
+      if (form.nodeName === 'BODY') return;
+    }
+    validateForm(form);
   })
 
   validateForm = function (form) {

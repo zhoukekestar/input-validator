@@ -1,0 +1,31 @@
+{
+  "name": "input-validator",
+  "version": "0.0.1",
+  "description": "Validator for input control.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhoukekestar/input-validator.git"
+  },
+  "keywords": [
+    "validator",
+    "input",
+    "form"
+  ],
+  "author": "zhoukekestar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhoukekestar/input-validator/issues"
+  },
+  "homepage": "https://github.com/zhoukekestar/input-validator#readme",
+  "devDependencies": {
+    "css-loader": "^0.28.1",
+    "webpack": "^2.5.1"
+  }
+}

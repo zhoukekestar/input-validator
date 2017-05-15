@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>native submit</title>
+    <link rel="stylesheet" href="../src/input-validator.css">
+  </head>
+  <body>
+    <form method="post" novalidate>
+      <input type="text" name="required" required is='input-validator'>
+      <input type='submit'>
+    </form>
+    <script>
+      var form = document.querySelector('form');
+      form.onsubmit = function (e) {
+        console.log(e);
+        // e.preventDefault();
+        // e.stopPropagation();
+      }
+    </script>
+    <script src='../src/input-invalidator.js'></script>
+    <script src='../src/input-validator.js'></script>
+  </body>
+</html>

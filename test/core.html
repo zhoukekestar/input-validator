@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>native submit</title>
+    <style media="screen">
+      input {
+        border: solid 1px #ccc;
+      }
+      input:valid {
+        border: solid 1px #0f0;
+      }
+      input:invalid {
+        border: solid 1px #f00;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <input type="text" name="required" required>
+      <input type='submit'>
+    </form>
+    <form>
+      <input type="text" name="required" required>
+      <a href="javascript:;" onclick='this.parentNode.submit()'>submit by js</a>
+    </form>
+    <form>
+      <input type="text" name="required" required title='You forgot this!'>
+      <input type='submit'>
+    </form>
+    <form>
+      <input type="text" name="required" required title='You forgot this!'>
+      <a href="javascript:;" onclick='this.parentNode.submit()'>submit by js</a>
+    </form>
+
+    <script src='../src/core.js'>
+
+    </script>
+  </body>
+</html>

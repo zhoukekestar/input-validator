@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>native submit</title>
+    <style media="screen">
+      input {
+        border: solid 1px #ccc;
+      }
+      input:valid {
+        border: solid 1px #ff0;
+      }
+      input:invalid {
+        border: solid 1px #f00;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="post">
+      <input type="text" name="required" required is='input-validator'>
+      <input type="text" name="required" required is='input-validator'>
+      <input type='submit'>
+    </form>
+    <button onclick='form.submit()'>submit by js</button>
+    <script>
+      HTMLF
+      var form = document.querySelector('form');
+      form.onsubmit = function (e) {
+        console.log(e);
+        // e.preventDefault();
+        // e.stopPropagation();
+      }
+    </script>
+  </body>
+</html>

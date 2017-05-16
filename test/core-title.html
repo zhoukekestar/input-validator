@@ -7,22 +7,12 @@
       body {
         text-align: center;
       }
-      input {
-        border: solid 1px #ccc;
-      }
-      input:not([type=submit]):valid {
-        border: solid 1px #0f0;
-      }
-      input:invalid {
-        border: solid 1px #f00;
-      }
     </style>
   </head>
   <body>
     <form>
-      <input name="key" required>
+      <input type="text" name="key" required title='This field is required! by title~'>
       <input type='submit'>
-      <button>button</button>
       <a href="javascript:;" onclick='this.parentNode.submit()'>submit()</a>
     </form>
     <script src='../src/core.js'></script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>work with form-json</title>
+    <style>
+      body {
+        text-align: center;
+      }
+      textarea {
+        width: 340px;
+        height: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea></textarea>
+    <form action="" method='POST' enctype="application/form-json">
+      <input name='name' required title='you have to input this field ~'>
+      <input type='submit' />
+      <button>button</button>
+      <a href="javascript:;" onclick="this.parentNode.submit()">submit()</a>
+    </form>
+
+    <script src='https://zhoukekestar.github.io/form-json/src/form-json.js'></script>
+    <script src='../src/core.js'></script>
+    <script>
+      var form = document.querySelector('form');
+      form.beforeStringify = function (d) {
+        document.querySelector('textarea').value = JSON.stringify(d, null, 2);
+        return null;
+      }
+    </script>
+  </body>
+</html>

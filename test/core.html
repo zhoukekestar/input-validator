@@ -33,8 +33,11 @@
       <a href="javascript:;" onclick='this.parentNode.submit()'>submit by js</a>
     </form>
 
-    <script src='../src/core.js'>
-
+    <script src='../src/core.js'></script>
+    <script>
+      HTMLInputValidatorElement.setDefaultMessages({
+        valueMissing: 'Sorry, you have to input this.'
+      })
     </script>
   </body>
 </html>

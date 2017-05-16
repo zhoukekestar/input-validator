@@ -9,23 +9,70 @@ If you only use `core.js`. You will see different notification on different brow
 
 Test this [core feature online](https://zhoukekestar.github.io/input-validator/test/core.html).
 
-# API
-* `HTMLInputValidatorElement.setDefaultMessages` to set messages for `patternMismatch`, `valueMissing` and so on.
-* `HTMLInputValidatorElement.registerType` to register your custom type.
+# Features
+* `setDefaultMessages` to set messages for `patternMismatch`, `valueMissing` and so on. [Try this online.](https://zhoukekestar.github.io/input-validator/test/core-default-messages.html)
 
-# Dispatch Event
-This is an enhancement feature (not W3C).
+  ```js
+  HTMLInputValidatorElement.setDefaultMessages({
+    valueMissing: 'Sorry, you have to input this. by default message~'
+  })
+  ```
+
+* `registerType` to register your custom type.  [Try this online.](https://zhoukekestar.github.io/input-validator/test/core-register-type.html)
+
+  ```html
+  <form>
+    <input type='OneORZero'>
+  </form>
+  <script>
+    HTMLInputValidatorElement.registerType('OneORZero', function (value) {
+      if (value === '0' || value === '1') return '';
+      return 'Please input 0 or 1.';
+    });
+  </script>
+  ```
+
+* `title` Set title to show custom message. [Try this online.](https://zhoukekestar.github.io/input-validator/test/core-title.html)
+
+  ```html
+  <form>
+    <input name="key" required title='This field is required! by title~'>
+  </form>
+  ```
+
+
+
+# Events
+This is an enhancement feature (not W3C). Because native `invalid` event can't bubbles to parents.
 * `input-valid` if an input set a valid value.
 * `input-invalid` if an input set a invalid value.
-* `invalid` Native event that can't bubbles to parent node.
 
 # Submit
 This is an enhancement feature (not W3C).
 
-Browser won't check validity if you call native submit by js. We hook the native submit to check validity.
+Browser won't check validity if you call native submit by js. We hook the native
+submit to check validity. So you can submit form by `input`, `button` or `submit()`.
+
+```html
+<form>
+  <input name='key'>
+  <input type='submit'>
+  <button>button</button>
+  <a href="javascript:;" onclick='this.parentNode.submit()'>submit()</a>
+</form>
+```
 
 # Browser Compatibility
 * `checkValidity` [IE 10+](http://caniuse.com/#search=checkValidity)
+
+# Third Party
+* `form-json` This library works well with form-json. [Try this online.](https://zhoukekestar.github.io/input-validator/test/work-with-form-json.html)
+  ```html
+  <form enctype="application/form-json">
+    <input name='name' required title='you have to input this field ~'>
+    <input type='submit' />
+  </form>
+  ```
 
 # Read More
 * [constraintvalidation on html5rocks](https://www.html5rocks.com/en/tutorials/forms/constraintvalidation/)

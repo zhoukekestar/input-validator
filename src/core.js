@@ -50,7 +50,7 @@
     var form = e.target;
     var button = e.target;
 
-    if (button.nodeName === 'BUTTON' || (button.nodeName === 'INPUT' && button.type === 'SUBMIT')) {
+    if (button.nodeName === 'BUTTON' || (button.nodeName === 'INPUT' && button.type.toLowerCase() === 'submit')) {
       // submit button
     } else {
       // Not a submit button, just return.

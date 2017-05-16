@@ -1,0 +1,8 @@
+{
+
+  "extends": "airbnb-base/legacy",
+  "rules": {
+    "func-names": ["warn", "as-needed"],
+    "no-param-reassign": "warn"
+  }
+}

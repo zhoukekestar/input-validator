@@ -11,17 +11,19 @@
    * Navite Submit Hook
    */
   HTMLFormElement.prototype.submit = function () {
+    var result;
+    var btn;
+
     if (this.hasAttribute('novalidate')) {
       return nativeSubmit.call(this);
     }
 
-    var result = validateForm(this);
+    result = validateForm(this);
     if (result === true) {
       nativeSubmit.call(this);
     } else {
-      var btn = getFormButton(this);
+      btn = getFormButton(this);
       btn.click();
-      console.log(result + ' is invalid.');
     }
   };
 
@@ -46,29 +48,46 @@
    **/
   document.body.addEventListener('click', function (e) {
     var form = e.target;
+    var button = e.target;
+
+    if (button.nodeName === 'BUTTON' || (button.nodeName === 'INPUT' && button.type === 'SUBMIT')) {
+      // submit button
+    } else {
+      // Not a submit button, just return.
+      return;
+    }
+
     while (form.nodeName !== 'FORM') {
       form = form.parentNode;
       if (form.nodeName === 'BODY') return;
     }
+
     validateForm(form);
   });
 
   /**
    * Validate Form
-   * @param  {[type]} form              [description]
-   * @param  {[type]} validateAllInputs [description]
-   * @return {[type]}                   [description]
+   * @param  { FormElement } form
+   * @param  { Bool } validateAllInputs  validate all inputs or not.
+   * @return { [Bool, InputElement] }  true if all inputs is valided, or return first invalid input.
    */
   validateForm = function (form, validateAllInputs) {
     var inputs = form.querySelectorAll('input');
     var i = 0;
-
+    var invalidInput;
 
     for (; i < inputs.length; i += 1) {
       if (validateInput(inputs[i]) !== true) {
-        return inputs[i];
+        // If we should not validate all inputs, just return first invalid input.
+        if (!validateAllInputs) {
+          return inputs[i];
+        }
+        // Save first invalid input to invalidInput
+        if (!invalidInput) invalidInput = inputs[i];
       }
     }
+    // Return invalid input if exist.
+    if (invalidInput) return invalidInput;
     return true;
   };
 
@@ -81,12 +100,22 @@
     var validity = input.validity;
     var key;
     var i = 0;
+    var type = input.getAttribute('type');
+    var typeMessage;
 
     for (; i < VALIDITY_KEYS.length; i += 1) {
       key = VALIDITY_KEYS[i];
       if (validity[key]) {
         input.dispatchEvent(new CustomEvent('input-invalid', { bubbles: true }));
         return input.setCustomValidity(input.title || DEFAULT_MESSAGES[key] || input.validationMessage);
+      }
+    }
+
+    if (TYPES[type]) {
+      typeMessage = TYPES[type](input.value, input);
+      if (typeMessage) {
+        input.dispatchEvent(new CustomEvent('input-invalid', { bubbles: true }));
+        return input.setCustomValidity(input.title || typeMessage);
       }
     }
 
@@ -117,7 +146,7 @@
       DEFAULT_MESSAGES = Object.assign(DEFAULT_MESSAGES, msg);
     },
     registerType: function (type, func) {
-      TYPES.type = func;
+      TYPES[type] = func;
     }
   };
 }());

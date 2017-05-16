@@ -43,29 +43,6 @@
   };
 
   /**
-   * Button or Input which type is submit will trigger click event
-   * that can show invalid message for input by browser with default behavior.
-   **/
-  document.body.addEventListener('click', function (e) {
-    var form = e.target;
-    var button = e.target;
-
-    if (button.nodeName === 'BUTTON' || (button.nodeName === 'INPUT' && button.type.toLowerCase() === 'submit')) {
-      // submit button
-    } else {
-      // Not a submit button, just return.
-      return;
-    }
-
-    while (form.nodeName !== 'FORM') {
-      form = form.parentNode;
-      if (form.nodeName === 'BODY') return;
-    }
-
-    validateForm(form);
-  });
-
-  /**
    * Validate Form
    * @param  { FormElement } form
    * @param  { Bool } validateAllInputs  validate all inputs or not.
@@ -128,11 +105,29 @@
    * Input listener to validate input realtime.
    */
   document.body.addEventListener('input', function (e) {
+    validateInput(e.target);
+  });
+
+  /**
+   * Button or Input which type is submit will trigger click event
+   * that can show invalid message for input by browser with default behavior.
+   **/
+  document.body.addEventListener('click', function (e) {
     var form = e.target;
+    var button = e.target;
+
+    if (button.nodeName === 'BUTTON' || (button.nodeName === 'INPUT' && button.type.toLowerCase() === 'submit')) {
+      // submit button
+    } else {
+      // Not a submit button, just return.
+      return;
+    }
+
     while (form.nodeName !== 'FORM') {
       form = form.parentNode;
       if (form.nodeName === 'BODY') return;
     }
+
     validateForm(form);
   });
 

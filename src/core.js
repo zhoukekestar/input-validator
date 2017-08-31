@@ -125,6 +125,9 @@
 
     while (form.nodeName !== 'FORM') {
       form = form.parentNode;
+
+      if (!form) return; // if Element is removed form document, it will be null.
+
       if (form.nodeName === 'BODY') return;
     }
 
